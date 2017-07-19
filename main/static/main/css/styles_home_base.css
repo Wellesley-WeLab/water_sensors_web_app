@@ -1,0 +1,38 @@
+.link-intro-page {
+    text-decoration: none;
+    font-weight: medium;
+    color: black;
+    font-family: "Roboto Slab";
+    margin-left: -30px;
+}
+
+.link-intro-page img {
+    width: 40px; height: 40px;
+}
+
+#app-title {
+    font-family: "Roboto Slab";
+}
+
+#left-nav {
+    background: #c6dde6;
+}
+
+.main-links {
+    color: black !important;
+}
+
+#logout-link {
+    display: inline-block;
+    position: absolute;
+    bottom: 20px;
+}
+
+#logout-link:hover {
+    cursor: pointer !important;
+    background: #c6dde6 !important;
+}
+
+.nav-link {
+    margin-right: 10px;
+}

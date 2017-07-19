@@ -1,0 +1,11 @@
+{
+    "short_name": "",
+    "name": "",
+    "display": "standalone",
+    "background_color": "#2196F3",
+    "icons": [{
+        "src": "img/app_logo.png",
+        "type": "image/png",
+        "sizes": "192x192"
+    }]
+}

@@ -1,0 +1,31 @@
+<!--
+this page shows information about the app
+-->
+
+{% extends "main/base.html" %}
+
+{% load static %}
+
+{% block links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles_intro.css' %}">
+    <title>Some Title</title>    
+{% endblock %}
+
+{% block content %}
+
+<div id="banner">
+    <div class="transparency">
+        <header class="mdl-layout__header mdl-layout__header--transparent">
+            <div class="mdl-layout__header-row">
+                <img id="app-logo" src="{% static 'main/img/app_logo.png' %}"/>
+                <span class="mdl-layout-title">Some Title</span>
+                <div class="mdl-layout-spacer"></div>
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link header-links" href="{% url 'main:login' %}">Login</a>
+                </nav>
+            </div>
+        </header>
+    </div>
+</div>
+    
+{% endblock %}

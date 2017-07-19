@@ -1,0 +1,4 @@
+main/static/main/css/* linguist-vendored
+main/static/main/css/styles_* linguist-vendored=false
+main/static/main/js/* linguist-vendored
+main/static/main/js/ws_* linguist-vendored=false

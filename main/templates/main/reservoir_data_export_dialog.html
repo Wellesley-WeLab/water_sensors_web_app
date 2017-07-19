@@ -1,0 +1,46 @@
+{% load static %}
+
+<dialog class="mdl-dialog" id="export-data-dialog">
+    <h4 class="mdl-dialog__title">Exportar Dados</h4>
+    <div class="mdl-dialog__content">
+        <div class="mdl-grid">
+            Escolher Reservatórios
+            <div id="export-data-reservoir-list-container" class="mdl-cell--12-col-tablet">
+                <ul class="mdl-list">
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                        Escolher Todos
+                        </span>
+                        <span class="mdl-list__item-secondary-action">
+                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" 
+                            for="export-data-reservoir-list-all">
+                            <input type="checkbox" id="export-data-reservoir-list-all" 
+                                class="mdl-checkbox__input" />
+                        </label>
+                        </span>
+                    </li>
+                </ul>
+                <ul class="mdl-list" id="export-data-reservoir-list">
+                </ul>
+            </div>
+        </div>
+        <div class="mdl-grid mdl-grid--no-spacing" id="export-data-filters">
+            <div class="mdl-cell mdl-cell--2-col-tablet">
+                Dados Desde<input type="date" id="export-data-dateFrom" class="mdl-shadow--2dp">
+            </div>
+            <div class="mdl-cell mdl-cell--2-col-tablet">
+                Dados Até<input type="date" id="export-data-dateUntil" class="mdl-shadow--2dp">
+            </div>
+        </div>
+    </div>
+    <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button mdl-js-button" id="export-data-bt-csv">Exportar CSV</button>
+        <button type="button" class="mdl-button mdl-js-button" id="export-data-bt-xls">Exportar XLS</button> 
+        <button type="button" class="mdl-button mdl-js-button" id="export-data-bt-cancel">Cancelar</button> 
+    </div>
+</dialog>
+
+<script>
+    window.RESERVOIR_DATA_PATH = "{% url 'main:reservoirData' %}";
+    window.EXPORT_DATA_PATH   = "{% url 'main:exportData' %}";
+</script>

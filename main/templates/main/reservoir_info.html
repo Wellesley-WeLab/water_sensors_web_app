@@ -1,0 +1,156 @@
+<!--
+    show details of a specific reservoir
+-->
+
+{% extends "main/home_base.html" %}
+{% load static %}
+
+{% block links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles_reservoir_info.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles_reservoir_data_export_dialog.css' %}">    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <title>Detalhes Reservatório</title>
+{% endblock %}
+
+{% block content %}
+
+    <header class="mdl-shadow--2dp">
+        <h5 id="reservoir-name">{{ reservoirState.addressName_ }}</h6>
+        <div class="mdl-layout-spacer"></div>
+        <div id="header-buttons">
+            <button class="mdl-button mdl-js-button" id="reservoir-link-export-data">
+                <i class="material-icons">file_download</i>
+                <div class="mdl-tooltip" data-mdl-for="reservoir-link-export-data">
+                    Exportar Dados
+                </div>
+            </button>
+            <button class="mdl-button mdl-js-button" id="reservoir-link-view-pics">
+                <i class="material-icons">photo_library</i>
+                <div class="mdl-tooltip" data-mdl-for="reservoir-link-view-pics">
+                    Ver fotos deste reservatório
+                </div>
+            </button>
+            <button class="mdl-button mdl-js-button" id="reservoir-link-add-pic">
+                <i class="material-icons">add_a_photo</i>
+                <div class="mdl-tooltip" data-mdl-for="reservoir-link-add-pic">
+                    Adicionar foto deste reservatório
+                </div>
+            </button>
+        </div>
+    </header>
+
+    <div class="mdl-grid" id="reservoir-info-section">
+        <div class="mdl-cell mdl-cell--4-col" id="reservoir-info-list">
+            <ul>
+                <li id="reservoir-heigth">
+                    <span class="reservoir-info-val" >Altura: </span>
+                    {{ reservoirState.heigth }} m
+                </li>
+                <li id="reservoir-width">
+                    <span class="reservoir-info-val" >Largura: </span>
+                    {{ reservoirState.width }} m
+                </li>
+                <li id="reservoir-length">
+                    <span class="reservoir-info-val" >Comprimento: </span>
+                    {{ reservoirState.length }} m
+                </li>
+                <li id="reservoir-total-capacity">
+                    <span class="reservoir-info-val" >Capacidade Máxima: </span>
+                    {{ reservoirState.totalCapacity_ }} m³
+                </li>
+                {% if reservoirState.lastMeasurement_  %}
+                    <li id="reservoir-current-water-level">
+                        <span class="reservoir-info-val" >Quantidade de Água: </span>
+                        {{ reservoirState.waterVolume_ }} m³
+                    </li>
+                    <li id="reservoir-current-pH">
+                        <span class="reservoir-info-val" >pH: </span>
+                        {{ reservoirState.lastMeasurement_.pH }}
+                    </li>
+                    <li id="reservoir-current-salinity">
+                        <span class="reservoir-info-val" >Salinidade: </span>
+                        {{ reservoirState.lastMeasurement_.salinity }} PSI
+                    </li>
+                    <li id="reservoir-current-conductivity">
+                        <span class="reservoir-info-val" >Condutividade: </span>
+                        {{ reservoirState.lastMeasurement_.conductivity }} µS
+                    </li>
+                    <li id="reservoir-current-tds">
+                        <span class="reservoir-info-val" >TDS: </span>
+                        {{ reservoirState.lastMeasurement_.tds }} ppm
+                    </li>
+                {% else %}
+                    <li id="reservoir-current-tds">
+                        <span class="reservoir-info-no-data" >Sem Medições</span>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col" id="reservoir-animation-section">
+            <canvas id="reservoir-animation"></canvas>
+        </div>
+    </div>
+
+    <div id="reservoir-data-history-section">
+        <div class="mdl-grid mdl-js-grid">
+            <div class="mdl-cell mdl-cell--2-col">
+                Dados Desde<input type="date" id="dateFrom" class="mdl-shadow--2dp">
+            </div>
+            <div class="mdl-cell mdl-cell--2-col">
+                Dados Até<input type="date" id="dateUntil" class="mdl-shadow--2dp">
+            </div>
+            <div id="xDimField" class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+                <input class="mdl-textfield__input" type="text" id="xDim" readonly tabIndex="-1">
+                <label for="xDim">
+                    <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                </label>
+                <label for="xDim" class="mdl-textfield__label">Dimensão do eixo X</label>
+                <ul for="xDim" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                    <li class="mdl-menu__item" data-val="hour" id="xDim_hour">Horas</li>
+                    <li class="mdl-menu__item" data-val="day" id="xDim_day">Dias</li>
+                    <li class="mdl-menu__item" data-val="month" id="xDim_month">Meses</li>                        
+                </ul>
+            </div>
+        </div>
+        <div class="mdl-grid chart-grid">
+            <div class="mdl-cell mdl-cell--12-col" id="reservoir-water-level-chart"></div>
+        </div>
+        <div class="mdl-grid chart-grid">
+          <div class="mdl-cell mdl-cell--6-col" id="reservoir-salinity-chart"></div>
+          <div class="mdl-cell mdl-cell--6-col" id="reservoir-conductivity-chart"></div>
+        </div>
+        <div class="mdl-grid chart-grid">
+          <div class="mdl-cell mdl-cell--6-col" id="reservoir-pH-chart"></div>
+          <div class="mdl-cell mdl-cell--6-col" id="reservoir-tds-chart"></div>
+        </div>
+    </div>
+
+
+    {% include 'main/reservoir_data_export_dialog.html' %}
+
+    <script>
+        window.reservoir    = JSON.parse('{{ reservoir | safe }}');
+        window.reservoirPics = {{ pictures | safe }};
+        {% if reservoirState.lastMeasurement_ %}
+            window.reservoir.waterLevel = {{ reservoirState.lastMeasurement_.waterLevel | safe }};
+        {% else %}
+            window.reservoir.waterLevel = 0;
+        {% endif %}
+        // window.measurements = JSON.parse('{{ measurements | safe }}');
+        window.reservoirInputs  = JSON.parse('{{ inputs | safe }}');
+        window.reservoirOutputs = JSON.parse('{{ outputs | safe }}');
+        window.RESERVOIR_WALL = "{% static 'main/img/reservoir_wall.jpg' %}";
+        window.WATER_TEXTURE  = "{% static 'main/img/water_texture.jpg' %}";
+        window.AXIS_TEXT_FONT = "{% static 'main/gentilis_regular.typeface.json' %}";
+        window.RESERVOIR_INFO_PATH = "{% url 'main:measurementData' %}";
+    </script>
+    <script src="{% static 'main/js/three.min.js' %}"></script>
+    <script src="{% static 'main/js/OrbitControls.js' %}"></script>
+    <script src="{% static 'main/js/ws_reservoir_animation.js' %}"></script>
+    <script src="{% static 'main/js/moment.js' %}"></script>
+    <script src="{% static 'main/js/ws_reservoir_info.js' %}"></script>
+    <script src="{% static 'main/js/ws_export_data_dialog.js' %}"></script>
+    
+
+{% endblock %}

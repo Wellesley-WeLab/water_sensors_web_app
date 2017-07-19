@@ -1,0 +1,79 @@
+<!--
+    this is the login page
+-->
+
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles_login.css' %}">
+    <title>Login</title>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="main">
+
+    <div class="transparency"></div>
+
+    <a id="link-intro-page" href="{% url 'main:main' %}">
+        <div class="mdl-grid">
+            <div class="mdl-cell--4-col"><img id="app-logo" src="{% static 'main/img/app_logo.png' %}"/></div>
+            <div class="mdl-cell--8-col" id="app-title">Some Title</div>
+        </div>
+    </a>
+
+
+    <!-- Section with the login fields -->
+    <div id="login-section" >
+        {% csrf_token %}
+
+        <div class="mdl-grid mdl-grid--no-spacing" id="login-section-grid">
+
+            <div class="mdl-cell mdl-cell--4-row">
+                <p id="login-text">Login</p>
+            </div>
+
+            <div class="mdl-cell mdl-cell--2-row">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="username-field">
+                    <input class="mdl-textfield__input" type="text" id="username">
+                    <label class="mdl-textfield__label" for="username">Nome de Utilizador</label>
+                    <span class="mdl-textfield__error">Nome de Utilizador desconhecido</span>
+                </div>
+            </div>
+
+            <div class="mdl-cell mdl-cell--2-row">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="password-field">
+                    <input class="mdl-textfield__input" type="password" id="password">
+                    <label class="mdl-textfield__label" for="password">Password</label>
+                    <span class="mdl-textfield__error">Password errada</span>
+                </div>
+            </div>
+
+            <div class="mdl-cell mdl-cell--2-row">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="bt-login" onclick="doLogin()">
+                    Entrar
+                </button>
+            </div>
+            
+            <div class="mdl-cell mdl-cell--2-row">
+                <a href="" class="mdl-navigation__link">Esqueceu-se da password?</a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script hidden>
+    // path to access the authentication function
+    DO_LOGIN_PATH = "{% url 'main:doLogin' %}";
+    // path for the home page
+    HOME_PATH     = "{% url 'main:home' %}";
+</script>
+
+<!-- include scripts refering to this page -->
+<script src="{% static 'main/js/ws_login.js' %}"></script>
+
+{% endblock %}

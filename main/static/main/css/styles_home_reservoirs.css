@@ -1,0 +1,71 @@
+#main-grid {
+    min-height: 100vh;
+}
+
+.mdl-card__title {
+    height: 150px;
+}
+
+#filters {
+    height: 120px;
+    background: #505050;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+#filters > span {
+    display: inline-block;
+    color: white;
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 12pt;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+#island-filter, #county-filter {
+    max-width: none !important;
+    width: 15% !important;
+    margin: 0 20px;
+}
+
+#list {
+    margin-top: 140px;
+}
+
+.card-info {
+    margin: 0;
+}
+
+.card-info-val {
+    padding: 5px 0px;
+    font-family: Roboto;
+}
+
+.card {
+    width: 96%;
+    margin: 10px 2%;
+    border: 0.5px solid rgba(100, 100, 100, 0.2);
+}
+
+.card-button-icon {
+    margin-right: 10px;
+}
+
+.mdl-card__actions {
+    display: inline-flex;
+}
+
+.mdl-textfield__label{
+    color: white !important;
+}
+
+.mdl-textfield__input {
+    color: white !important;
+}
+
+.mdl-icon-toggle__label {
+    color: white !important;
+}

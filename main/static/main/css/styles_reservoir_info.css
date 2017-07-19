@@ -1,0 +1,64 @@
+header {
+    display: inline-flex;
+    width: 100%;
+    background: #505050;
+    height: 80px;
+}
+
+#reservoir-name {
+    margin-left: 10px;
+    color: white;
+}
+
+#header-buttons {
+    position: relative;
+    top: 15px; right: 20px;
+}
+#header-buttons button {
+    color: white;
+}
+
+#reservoir-info-section {
+    height: 350px;
+}
+
+#reservoir-info-list ul {
+    list-style: none;
+}
+
+#reservoir-info-list ul li {
+    font-family: Roboto;
+}
+
+.reservoir-info-val {
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.reservoir-info-no-data {
+    font: bold;
+    color: #ff3010;
+    font-size: 12pt;
+}
+
+#reservoir-animation {
+    width: 100%;
+    height: 100%;
+}
+
+#reservoir-data-history-section > .mdl-section { width: 95%; }
+#reservoir-data-history-section > .chart-grid { height: 350px !important; }
+
+
+input[type='date'] {
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-radius: 2px;
+}
+
+#xDimField {
+    display: inline-flex;
+    max-width: none !important;
+    width: 200px !important;
+}

@@ -1,0 +1,26 @@
+
+#banner {
+  background: url('../img/banner.jpg') center / cover;
+  height: 100vh;
+}
+
+.transparency {
+    background: rgba(1, 1, 1, 0.8);
+    /*position: absolute;*/
+    top: 0; left: 0;
+    z-index: 1;
+    width: 100vw; height: 100vh;
+}
+
+#banner .mdl-layout__header,
+#banner .mdl-layout__drawer-button {
+    color: white;
+}
+
+.mdl-layout-title {
+    font-family: "Roboto Slab";
+}
+
+#app-logo {
+    width: 40px; height: 40px;
+}

@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/material.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles_global.css' %}">  
+    <link rel="shortcut icon" type="image/png" href="{% static 'main/img/app_logo.png' %}"/>  
+    {% block links %} {% endblock %}
+    <script src="{% static 'main/js/material.js' %}"></script>
+    <link   rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">  
+  </head>
+  <body>
+
+    {% block content %} {% endblock %}
+
+    <!-- template for error dialog -->
+    <dialog class="mdl-dialog" id="error-dialog">
+      <h4 class="mdl-dialog__title">Erro</h4>
+      <div class="mdl-dialog__content" id="error-dialog-content"></div>
+      <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button" id="error-dialog-bt-ok">Ok</button>
+      </div>
+    </dialog>
+
+    <!-- template for message dialog -->
+    <dialog class="mdl-dialog" id="msg-dialog">
+      <h4 class="mdl-dialog__title" id="msg-dialog-title"></h4>
+      <div class="mdl-dialog__content" id="msg-dialog-content"></div>
+      <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button" id="msg-dialog-bt-ok">Ok</button>
+      </div>
+    </dialog>
+
+    <!-- template for choice dialog -->
+    <dialog class="mdl-dialog" id="choice-dialog">
+      <h4 class="mdl-dialog__title" id="choice-dialog-title"></h4>
+      <div class="mdl-dialog__content" id="choice-dialog-content"></div>
+      <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button" id="choice-dialog-bt-ok">Ok</button>
+        <button type="button" class="mdl-button" id="choice-dialog-bt-cancel">Cancelar</button>        
+      </div>
+    </dialog>
+
+
+    <footer class="mdl-mini-footer">
+      <div class="mdl-mini-footer__left-section" id="copyrigth">
+        <ul class="mdl-mini-footer__link-list">
+          <li><a href="http://www.wellesley.edu">Wellesley College</a></li>
+          <li><a href="http://www.unicv.edu.cv">UniCV</a></li>
+        </ul>
+      </div>
+      
+      <div class="mdl-mini-footer__right-section">
+        <div class="mdl-logo" id="copyright">&copy; WellesleyCollege &amp; UniCV</div>        
+      </div>
+    </footer>
+
+  <script src="{% static 'main/js/jquery-3.2.1.js' %}"></script>
+  <script src="{% static 'main/js/js.cookie.js' %}"></script>
+  <script src="{% static 'main/js/ws_util.js' %}"></script>
+
+  </body>
+</html>

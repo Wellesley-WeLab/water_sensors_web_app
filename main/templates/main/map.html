@@ -1,0 +1,42 @@
+<!--
+    shows all the reservoirs in a map
+-->
+
+{% extends "main/home_base.html" %}
+{% load static %}
+
+{% block links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles_home_map.css' %}">
+    <title>Mapa de Reservatórios</title>
+{% endblock %}
+
+{% block content %}
+
+    <div id="map-search-field">
+        <input type="text" id="map-search" placeholder="Procurar Reservatórios">
+        <div id="map-search-bt">
+            <i class="material-icons">search</i>            
+        </div>
+    </div>
+
+    <div id="map-reservoir-search-results mdl-shadow--2pd" hidden>
+        <ul id="map-reservoir-search-results-list">
+
+        </ul>
+    </div>
+
+    <div id="map"/>
+
+    <script>
+        window.reservoirs     = JSON.parse('{{ reservoirs | safe }}');
+        window.reservoirCons  = JSON.parse('{{ reservoirCons | safe }}');
+        window.pumps          = JSON.parse('{{ pumps | safe }}');
+        window.pumpCons       = JSON.parse('{{ pumpCons | safe }}');
+        window.RESERVOIR_ICON = "{% static 'main/img/reservoir_icon.png' %}";
+        window.PUMP_ICON      = "{% static 'main/img/pump_icon.png' %}";
+        window.MAP_PATH       = "{% url 'main:map' %}";
+    </script>
+    <script src="{% static 'main/js/ws_map.js' %}"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}&callback=loadMap"></script>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+#export-data-dialog {
+    width: 600px;
+    height: 400px;
+}
+
+#export-data-dialog .mdl-grid {
+    width: 100%;
+}
+
+#export-data-reservoir-list {
+    margin-top: 0 !important;
+}
+
+#export-data-dialog .mdl-dialog__actions {
+    position: absolute;
+    bottom: 20px; right: 20px;
+}
+
+#export-data-reservoir-list-container .mdl-list {
+    margin: 0;
+    padding: 0;
+}
+
+#export-data-reservoir-list .mdl-checkbox {
+    margin-left:  10px;
+}
+
+#export-data-reservoir-list li {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}

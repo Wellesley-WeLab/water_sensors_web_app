@@ -1,0 +1,75 @@
+<!--
+    shows all info about the reservoirs
+-->
+
+{% extends "main/home_base.html" %}
+{% load static %}
+
+{% block links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles_home_reservoirs.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/getmdl-select.min.css' %}">
+    <title>Reservatórios</title>
+{% endblock %}
+
+{% block content %}
+    <div id="main-grid">
+        <div id="filters" class="mdl-shadow--2dp">
+            <span>Filtrar Reservatórios</span>
+            <div class="mdl-grid">
+                <div id="island-filter" class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+                    <input class="mdl-textfield__input" type="text" id="island" readonly tabIndex="-1">
+                    <label for="island">
+                        <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                    </label>
+                    <label for="island" class="mdl-textfield__label">Ilha</label>
+                    <ul for="island" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                    {% for island in islands %}
+                        <li class="mdl-menu__item" data-val="{{ island }}">{{ island }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+
+                <div id="county-filter" class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+                    <input class="mdl-textfield__input" type="text" id="county" readonly tabIndex="-1">
+                    <label for="county">
+                        <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                    </label>
+                    <label for="county" class="mdl-textfield__label">Concelho</label>
+                    <ul for="county" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                    {% for county in counties %}
+                        <li class="mdl-menu__item" data-val="{{ county }}">{{ county }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div id="list">
+        {% for reservoir in reservoirs %}
+            <div class="card mdl-card">
+                <div class="mdl-grid mdl-grid--no-spacing card-info">
+                    <div class="mdl-card__title mdl-card--expand mdl-cell mdl-cell--3-col"
+                        style="background: url('{{ reservoir.mainPic_ }}') center / cover">
+                    </div>
+                    <div class="mdl-card__supporting-text mdl-cell mdl-cell--9-col">
+                        <div class="card-info-val"><strong>Localização: </strong>{{ reservoir.addressName_ }}</div>
+                        <div class="card-info-val"><strong>Capacidade Máxima: </strong>{{ reservoir.totalCapacity_ }} m³</div>
+                        <div class="card-info-val"><strong>Quantidade de Água: </strong>{{ reservoir.waterVolume_ }} m³</div>
+                    </div>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <div class="mdl-layout-spacer"></div>
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                        href="{% url 'main:reservoirDetailedInfo' %}?id={{ reservoir.res_id }}">
+                        <i class="material-icons card-button-icon">info</i>Mais Informação
+                    </a>
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                        href="{% url 'main:map' %}?id={{ reservoir.res_id }}">
+                        <i class="material-icons card-button-icon">map</i>Ver no Mapa
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
