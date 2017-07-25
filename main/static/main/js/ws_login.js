@@ -14,7 +14,7 @@ doLogin = () => {
 
     // to add the CSRF token
     Util.addCSRF(data);
-
+    
     $.post(DO_LOGIN_PATH, data)
     .done((result) => {
 
@@ -43,3 +43,9 @@ doLogin = () => {
 
     });
 }
+
+// doLogin when Enter pressed
+document.addEventListener('keydown', (event) => {
+    if (event.key == 'Enter')
+        doLogin();
+});
