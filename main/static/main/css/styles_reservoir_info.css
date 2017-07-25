@@ -22,17 +22,24 @@ header {
     height: 350px;
 }
 
-#reservoir-info-list ul {
-    list-style: none;
-}
-
-#reservoir-info-list ul li {
-    font-family: Roboto;
-}
-
 .reservoir-info-val {
+    margin-bottom: 10px;
+    padding: 5px;
+    text-align: center;
+    border-radius: 2px;
+    box-shadow: 0px 0.2px 1px 0px rgba(0,0,0,0.75);
+}
+
+.reservoir-info-val-desc {
+    font-size: 10pt;
+    font-family: "Roboto";
+    width: 100%;
+}
+
+.reservoir-info-val-val {
+    font-size: 11pt;
     font-weight: bold;
-    font-size: 12pt;
+    font-family: "Roboto";  
 }
 
 .reservoir-info-no-data {
@@ -62,3 +69,24 @@ input[type='date'] {
     max-width: none !important;
     width: 200px !important;
 }
+
+#reservoir-pics {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+#reservoir-pics img {
+    
+}
+
+#img-change-bt-left, #img-change-bt-right {
+    position: absolute;
+    top: 30vh;
+}
+
+#img-change-bt-left { left: 0; }
+#img-change-bt-right { right: 0; }

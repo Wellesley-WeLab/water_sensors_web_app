@@ -11,8 +11,8 @@ var textureLoader = new THREE.TextureLoader();
 var fontLoader    = new THREE.FontLoader();
 
 
-function InputPipeCurve() {
-  THREE.Curve.call(this);  
+function InputPipeCurve () {
+  THREE.Curve.call(this);
 }
 
 InputPipeCurve.prototype = Object.create(THREE.Curve.prototype);

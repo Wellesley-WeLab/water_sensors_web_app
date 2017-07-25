@@ -5,11 +5,11 @@
 }
 
 .transparency {
-    background: rgba(1, 1, 1, 0.8);
+    background: rgba(1, 1, 1, 0.6);
     /*position: absolute;*/
     top: 0; left: 0;
     z-index: 1;
-    width: 100vw; height: 100vh;
+    width: 98.93vw; height: 100vh;
 }
 
 #banner .mdl-layout__header,
@@ -19,8 +19,23 @@
 
 .mdl-layout-title {
     font-family: "Roboto Slab";
+    font-size: 20pt !important;
 }
 
 #app-logo {
-    width: 40px; height: 40px;
+    width: 10vw; height: 10vw;
+    margin-top: 80px;
+    margin-left: 43vw;
+    margin-right: 43vw;    
+}
+
+#site-desc {
+    color: white;
+    font-family: "Roboto";
+    font-size: 14pt;
+    text-align: center;
+    margin-top: 20px;
+    width: 50vw;
+    margin-left: 25vw;
+    margin-right: 25vw;
 }

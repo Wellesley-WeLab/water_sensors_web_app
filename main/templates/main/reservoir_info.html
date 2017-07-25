@@ -7,7 +7,7 @@
 
 {% block links %}
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles_reservoir_info.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles_reservoir_data_export_dialog.css' %}">    
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles_reservoir_data_export_dialog.css' %}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <title>Detalhes Reservatório</title>
 {% endblock %}
@@ -40,54 +40,61 @@
     </header>
 
     <div class="mdl-grid" id="reservoir-info-section">
-        <div class="mdl-cell mdl-cell--4-col" id="reservoir-info-list">
-            <ul>
-                <li id="reservoir-heigth">
-                    <span class="reservoir-info-val" >Altura: </span>
-                    {{ reservoirState.heigth }} m
-                </li>
-                <li id="reservoir-width">
-                    <span class="reservoir-info-val" >Largura: </span>
-                    {{ reservoirState.width }} m
-                </li>
-                <li id="reservoir-length">
-                    <span class="reservoir-info-val" >Comprimento: </span>
-                    {{ reservoirState.length }} m
-                </li>
-                <li id="reservoir-total-capacity">
-                    <span class="reservoir-info-val" >Capacidade Máxima: </span>
-                    {{ reservoirState.totalCapacity_ }} m³
-                </li>
-                {% if reservoirState.lastMeasurement_  %}
-                    <li id="reservoir-current-water-level">
-                        <span class="reservoir-info-val" >Quantidade de Água: </span>
-                        {{ reservoirState.waterVolume_ }} m³
-                    </li>
-                    <li id="reservoir-current-pH">
-                        <span class="reservoir-info-val" >pH: </span>
-                        {{ reservoirState.lastMeasurement_.pH }}
-                    </li>
-                    <li id="reservoir-current-salinity">
-                        <span class="reservoir-info-val" >Salinidade: </span>
-                        {{ reservoirState.lastMeasurement_.salinity }} PSI
-                    </li>
-                    <li id="reservoir-current-conductivity">
-                        <span class="reservoir-info-val" >Condutividade: </span>
-                        {{ reservoirState.lastMeasurement_.conductivity }} µS
-                    </li>
-                    <li id="reservoir-current-tds">
-                        <span class="reservoir-info-val" >TDS: </span>
-                        {{ reservoirState.lastMeasurement_.tds }} ppm
-                    </li>
-                {% else %}
-                    <li id="reservoir-current-tds">
-                        <span class="reservoir-info-no-data" >Sem Medições</span>
-                    </li>
-                {% endif %}
+        <div class="mdl-cell mdl-cell--6-col" id="reservoir-info-list">
+            <div class="mdl-grid" id="reservoir-info">
+                <div class="mdl-cell mdl-cell--6-col">
+                    <div id="reservoir-heigth" class="reservoir-info-val">
+                        <div class="reservoir-info-val-val">
 
-            </ul>
+                            {{ reservoirState.heigth }} m
+                        </div>                
+                        <span class="reservoir-info-val-desc">Altura</span>
+                    </div>
+                    <div id="reservoir-width" class="reservoir-info-val">
+                        <div class="reservoir-info-val-val">{{ reservoirState.width }} m</div>
+                        <span class="reservoir-info-val-desc" >Largura</span>
+                    </div>
+                    <div id="reservoir-length" class="reservoir-info-val">
+                        <div class="reservoir-info-val-val">{{ reservoirState.length }} m</div>
+                        <span class="reservoir-info-val-desc" >Comprimento</span>
+                    </div>
+                    <div id="reservoir-total-capacity" class="reservoir-info-val">
+                        <div class="reservoir-info-val-val">{{ reservoirState.totalCapacity_ }} m³</div>
+                        <span class="reservoir-info-val-desc" >Capacidade Máxima</span>
+                    </div>
+                {% if not reservoirState.lastMeasurement_ %}
+                    <div id="reservoir-current-tds">
+                        <span class="reservoir-info-no-data" >Sem Medições</span>
+                    </div>
+                {% endif %}
+                </div>         
+                {% if reservoirState.lastMeasurement_ %}
+                <div class="mdl-cell mdl-cell--6-col">
+                    <div id="reservoir-current-water-level" class="reservoir-info-val">
+                        <div class="reservoir-info-val-val">{{ reservoirState.waterVolume_ }} m³</div>
+                        <span class="reservoir-info-val-desc" >Quantidade de Água</span>
+                    </div>
+                    <div id="reservoir-current-pH" class="reservoir-info-val">
+                        <div class="reservoir-info-val-val">{{ reservoirState.lastMeasurement_.pH }}</div>
+                        <span class="reservoir-info-val-desc" >pH</span>
+                    </div>
+                    <div id="reservoir-current-salinity" class="reservoir-info-val">
+                        <div class="reservoir-info-val-val">{{ reservoirState.lastMeasurement_.salinity }} PSI</div>
+                        <span class="reservoir-info-val-desc" >Salinidade</span>
+                    </div>
+                    <div id="reservoir-current-conductivity" class="reservoir-info-val">
+                        <div class="reservoir-info-val-val">{{ reservoirState.lastMeasurement_.conductivity }} µS</div>
+                        <span class="reservoir-info-val-desc" >Condutividade</span>
+                    </div>
+                    <div id="reservoir-current-tds" class="reservoir-info-val">
+                        <div class="reservoir-info-val-val">{{ reservoirState.lastMeasurement_.tds }} ppm</div>
+                        <span class="reservoir-info-val-desc" >TDS</span>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
         </div>
-        <div class="mdl-cell mdl-cell--8-col" id="reservoir-animation-section">
+        <div class="mdl-cell mdl-cell--6-col" id="reservoir-animation-section">
             <canvas id="reservoir-animation"></canvas>
         </div>
     </div>
@@ -95,10 +102,10 @@
     <div id="reservoir-data-history-section">
         <div class="mdl-grid mdl-js-grid">
             <div class="mdl-cell mdl-cell--2-col">
-                Dados Desde<input type="date" id="dateFrom" class="mdl-shadow--2dp">
+                <strong>Dados Desde</strong><input type="date" id="dateFrom" class="mdl-shadow--2dp">
             </div>
             <div class="mdl-cell mdl-cell--2-col">
-                Dados Até<input type="date" id="dateUntil" class="mdl-shadow--2dp">
+                <strong>Dados Até</strong><input type="date" id="dateUntil" class="mdl-shadow--2dp">
             </div>
             <div id="xDimField" class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
                 <input class="mdl-textfield__input" type="text" id="xDim" readonly tabIndex="-1">
@@ -126,6 +133,17 @@
         </div>
     </div>
 
+    <div id="reservoir-pics">
+    {% for pic in pictures %}
+        <img src="{{ pic }}" class="res-img">
+    {% endfor %}
+        <button class="mdl-button mdl-js-button" id="img-change-bt-left" onclick="imgChange(-1)">
+            <i class="material-icons">left</i>
+        </button>
+        <button class="mdl-button mdl-js-button" id="img-change-bt-right" onclick="imgChange(+1)">
+            <i class="material-icons">right</i>
+        </button>
+    </div>
 
     {% include 'main/reservoir_data_export_dialog.html' %}
 
@@ -149,6 +167,7 @@
     <script src="{% static 'main/js/OrbitControls.js' %}"></script>
     <script src="{% static 'main/js/ws_reservoir_animation.js' %}"></script>
     <script src="{% static 'main/js/moment.js' %}"></script>
+    <script src="{% static 'main/js/jquery.slides.js' %}"></script>
     <script src="{% static 'main/js/ws_reservoir_info.js' %}"></script>
     <script src="{% static 'main/js/ws_export_data_dialog.js' %}"></script>
     

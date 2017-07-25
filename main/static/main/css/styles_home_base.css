@@ -36,3 +36,7 @@
 .nav-link {
     margin-right: 10px;
 }
+
+.main-links:hover {
+    background: #d4e9f5 !important;
+}

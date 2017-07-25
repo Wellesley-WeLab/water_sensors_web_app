@@ -198,4 +198,5 @@ $(document).ready(() => {
     /* load google charts API */
     google.charts.load('current', { 'packages': ['line'] });
     google.charts.setOnLoadCallback(drawCharts);
+
 });

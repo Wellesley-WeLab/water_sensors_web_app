@@ -25,9 +25,14 @@ def main (req) :
     """
     opens the main page or the presentation page
     """
+    siteDesc = "Nós somos um grupo de estudantes e professores da Universidade \
+     de Cabo Verde, em Cabo Verde, e da Universidade de Wellesley, \
+     Boston USA, que tivemos uma idea para monitorizar o nível e a \
+     qualidade de água em reservatórios de distribuição de agua em Cabo Verde. \
+    "
 
     template = loader.get_template('main/intro.html')
-    return HttpResponse(template.render({}, req))
+    return HttpResponse(template.render({'site_desc': siteDesc}, req))
 
 
 def login (req) :
