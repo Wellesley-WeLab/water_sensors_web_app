@@ -75,16 +75,31 @@ $(document).ready(() => {
         // choose how to group data (by hour, day or month)
         duration = moment.duration(dateUntil.diff(dateFrom));
         var grouping;
-        if (duration.years() == 0 && duration.months() == 0 && duration.days() <= 1) {
+        if (duration.years() == 0 && duration.months() == 0 && duration.days() == 0 && duration.hours() <= 1) {
+            document.getElementById('xDim_min').hidden = false;
+            document.getElementById('xDim_hour').hidden = true;
+            document.getElementById('xDim_day').hidden = true;
+            document.getElementById('xDim_month').hidden = true;
+
+            grouping = 'hour,minute';
+            if (xDimField.value != 'Minutos')
+                xDimField.value = 'Minutos';
+        }
+        // if the range is less than or equal to a day then group by hours
+        else if (duration.years() == 0 && duration.months() == 0 && duration.days() <= 1) {
+            document.getElementById('xDim_min').hidden = false;
             document.getElementById('xDim_hour').hidden = false;
             document.getElementById('xDim_day').hidden = true;
             document.getElementById('xDim_month').hidden = true;
 
-            grouping = 'day,hour';            
-            if (xDimField.value != 'Horas')
-                xDimField.value = 'Horas';
+            grouping = 'day,hour';           
+            if (xDimField.value == 'Minutos')
+                grouping += ',minute';
+            else xDimField.value = 'Horas';
         }
+        // if the duration if less than of equal to a month then group by day or hours
         else if (duration.years() == 0 && duration.months() <= 1) {
+            document.getElementById('xDim_min').hidden = true;
             document.getElementById('xDim_hour').hidden = false;
             document.getElementById('xDim_day').hidden = false;
             document.getElementById('xDim_month').hidden = true;
@@ -94,7 +109,9 @@ $(document).ready(() => {
                 grouping += ',hour';
             else xDimField.value = 'Dias'
         }
+        // if the duration is more than a month then group by days or months
         else {
+            document.getElementById('xDim_min').hidden = true;
             document.getElementById('xDim_hour').hidden = true;
             document.getElementById('xDim_day').hidden = false;
             document.getElementById('xDim_month').hidden = false;
@@ -174,10 +191,12 @@ $(document).ready(() => {
                     // set the x label as the date of the measurement
                     for (var p in xLabelParts) {
                         var lp = xLabelParts[p];
-                        if (lp == 'month')
+                        if (lp == 'month') // add the month to the date
                             xVal += moment.monthsShort(measurement[lp]-1) + ', ';
                         else if (lp == 'hour')
-                            xVal += measurement[lp] + ':00, '
+                            xVal += measurement[lp] + ' h, '
+                        else if (lp == 'minute')
+                            xVal += measurement[lp] + ' m, '
                         else
                             xVal += measurement[lp] + ', ';
                     }

@@ -93,7 +93,7 @@ var main = () => {
 
   /* create the 'water inside' object */
   // the height of the part of the reservoir without water
-  waterGap = reservoir.heigth - reservoir.waterLevel;
+  var wl = reservoir.waterLevel;
   var wiMat  = new THREE.MeshPhongMaterial({ color: 0x142286 });
   var waterTexture = textureLoader.load(WATER_TEXTURE);
   waterTexture.wrapS = waterTexture.wrapT = THREE.RepeatWrapping;
@@ -106,11 +106,11 @@ var main = () => {
     wiMat, wiMat, wiMat
   ]
   var waterInsideGeom = new THREE.BoxGeometry(
-    reservoir.width-0.01, reservoir.heigth-0.01-waterGap, reservoir.length-0.01);
+    reservoir.width-0.01, wl-0.01, reservoir.length-0.01);
   waterInside         = new THREE.Mesh(waterInsideGeom, waterInsideMats);
   waterInside.position = resOb.position;
-  waterInside.position.y = resOb.position.y - waterGap/2; // to be at the bottom of the reservoir
-
+  waterInside.position.y = resOb.position.y - (reservoir.heigth - wl)/2; // to be at the bottom of the reservoir
+  
   /* show  outputs of the reservoir */
   var output = new THREE.Mesh(
     new THREE.CylinderGeometry(0.25, 0.2, 0.4, 20, 10),

@@ -80,8 +80,8 @@ class Measurement (models.Model) :
         dtUntil = timezone.datetime.strptime(dateUntil, '%Y-%m-%d')
 
         measurements =  Measurement.objects \
-            .extra(select={'hour': 'hour(dateTime)', 'day': 'day(dateTime)',
-                           'month': 'month(dateTime)', 'year': 'year(dateTime)'}) \
+            .extra(select={'minute': 'minute(dateTime)', 'hour': 'hour(dateTime)', \
+                  'day': 'day(dateTime)', 'month': 'month(dateTime)', 'year': 'year(dateTime)'}) \
             .filter(dateTime__gt=dtFrom, dateTime__lte=dtUntil)
 
         if reservoirs != 'all' :

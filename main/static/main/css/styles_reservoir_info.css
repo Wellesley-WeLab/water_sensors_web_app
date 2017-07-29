@@ -48,6 +48,17 @@ header {
     font-size: 12pt;
 }
 
+
+.reservoir-info-chart {
+    padding: 5px;
+    border-radius: 2px;
+    border: 1px solid rgba(10,10,10,0.3);
+}
+
+.reservoir-info-chart g text {
+    fill: black !important;
+}
+
 #reservoir-animation {
     width: 100%;
     height: 100%;
@@ -79,9 +90,6 @@ input[type='date'] {
     z-index: 10;
 }
 
-#reservoir-pics img {
-    
-}
 
 #img-change-bt-left, #img-change-bt-right {
     position: absolute;

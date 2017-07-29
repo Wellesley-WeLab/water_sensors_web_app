@@ -114,6 +114,7 @@
                 </label>
                 <label for="xDim" class="mdl-textfield__label">Dimensão do eixo X</label>
                 <ul for="xDim" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                    <li class="mdl-menu__item" data-val="minute" id="xDim_min">Minutos</li>
                     <li class="mdl-menu__item" data-val="hour" id="xDim_hour">Horas</li>
                     <li class="mdl-menu__item" data-val="day" id="xDim_day">Dias</li>
                     <li class="mdl-menu__item" data-val="month" id="xDim_month">Meses</li>                        
@@ -121,15 +122,15 @@
             </div>
         </div>
         <div class="mdl-grid chart-grid">
-            <div class="mdl-cell mdl-cell--12-col" id="reservoir-water-level-chart"></div>
+            <div class="mdl-cell mdl-cell--12-col reservoir-info-chart" id="reservoir-water-level-chart"></div>
         </div>
         <div class="mdl-grid chart-grid">
-          <div class="mdl-cell mdl-cell--6-col" id="reservoir-salinity-chart"></div>
-          <div class="mdl-cell mdl-cell--6-col" id="reservoir-conductivity-chart"></div>
+          <div class="mdl-cell mdl-cell--6-col reservoir-info-chart" id="reservoir-salinity-chart"></div>
+          <div class="mdl-cell mdl-cell--6-col reservoir-info-chart" id="reservoir-conductivity-chart"></div>
         </div>
         <div class="mdl-grid chart-grid">
-          <div class="mdl-cell mdl-cell--6-col" id="reservoir-pH-chart"></div>
-          <div class="mdl-cell mdl-cell--6-col" id="reservoir-tds-chart"></div>
+          <div class="mdl-cell mdl-cell--6-col reservoir-info-chart" id="reservoir-pH-chart"></div>
+          <div class="mdl-cell mdl-cell--6-col reservoir-info-chart" id="reservoir-tds-chart"></div>
         </div>
     </div>
 
